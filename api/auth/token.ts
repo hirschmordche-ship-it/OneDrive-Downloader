@@ -1,60 +1,26 @@
-import type { VercelRequest, VercelResponse } from '@vercel/node';
-import fetch from 'node-fetch';
+export default async function handler(req, res) {
+  try {
+    const { code } = req.body;
 
-const CLIENT_ID = process.env.MS_CLIENT_ID!;
-const CLIENT_SECRET = process.env.MS_CLIENT_SECRET!;
-const REDIRECT_URI = process.env.MS_REDIRECT_URI!;
-const TOKEN_ENDPOINT = 'https://login.microsoftonline.com/consumers/oauth2/v2.0/token';
+    const params = new URLSearchParams();
+    params.append("client_id", process.env.MS_CLIENT_ID);
+    params.append("client_secret", process.env.MS_CLIENT_SECRET);
+    params.append("redirect_uri", process.env.MS_REDIRECT_URI);
+    params.append("grant_type", "authorization_code");
+    params.append("code", code);
 
-function getCookie(req: VercelRequest, name: string): string | null {
-  const cookie = req.headers.cookie;
-  if (!cookie) return null;
-  const parts = cookie.split(';').map(c => c.trim());
-  for (const part of parts) {
-    if (part.startsWith(name + '=')) {
-      return decodeURIComponent(part.substring(name.length + 1));
-    }
+    const tokenRes = await fetch(
+      "https://login.microsoftonline.com/consumers/oauth2/v2.0/token",
+      {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        body: params
+      }
+    );
+
+    const json = await tokenRes.json();
+    res.status(200).json(json);
+  } catch (e) {
+    res.status(500).json({ error: "Token exchange failed" });
   }
-  return null;
-}
-
-export default async function handler(req: VercelRequest, res: VercelResponse) {
-  if (req.method !== 'POST') {
-    return res.status(405).json({ error: 'method_not_allowed' });
-  }
-
-  const { code } = req.body as { code?: string };
-  if (!code) {
-    return res.status(400).json({ error: 'missing_code' });
-  }
-
-  const verifier = getCookie(req, 'pkce_verifier');
-  if (!verifier) {
-    return res.status(400).json({ error: 'missing_verifier' });
-  }
-
-  const body = new URLSearchParams({
-    client_id: CLIENT_ID,
-    scope: 'offline_access openid profile Files.ReadWrite Files.ReadWrite.All',
-    code,
-    redirect_uri: REDIRECT_URI,
-    grant_type: 'authorization_code',
-    code_verifier: verifier,
-    client_secret: CLIENT_SECRET
-  });
-
-  const response = await fetch(TOKEN_ENDPOINT, {
-    method: 'POST',
-    body
-  });
-
-  if (!response.ok) {
-    const text = await response.text();
-    return res.status(500).json({ error: 'token_exchange_failed', details: text });
-  }
-
-  const json = await response.json();
-
-  // Return tokens + basic info to frontend (frontend will store per-account)
-  res.status(200).json(json);
 }
