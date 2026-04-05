@@ -6,6 +6,7 @@
   ],
   "routes": [
     { "src": "/api/(.*)", "dest": "/api/$1.ts" },
+    { "src": "/(?!api/)(.+\\.(js|css|json|png|jpg|gif|svg|ico|woff|woff2))", "status": 200 },
     { "src": "/(.*)", "dest": "/public/index.html" }
   ]
 }
