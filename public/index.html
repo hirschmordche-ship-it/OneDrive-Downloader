@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OneDrive Multi‑Account Manager</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <!-- TERMS MODAL (shown only on first login) -->
+  <div id="termsModal" class="modal hidden">
+    <div class="modal-content glass">
+      <h2>Terms & Conditions</h2>
+      <div id="termsText" class="terms-text"></div>
+      <button id="acceptTerms" class="btn primary">I Agree</button>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="glass header">
+    <h1>OneDrive Manager</h1>
+    <div class="header-actions">
+      <button id="addAccountBtn" class="btn small">+ Add Account</button>
+      <button id="toggleUnified" class="btn small">Unified View</button>
+      <button id="themeBtn" class="btn small">Theme</button>
+    </div>
+  </header>
+
+  <!-- MAIN CONTENT -->
+  <main id="appRoot">
+
+    <!-- SEPARATE ACCOUNT BOXES -->
+    <div id="accountBoxes" class="account-boxes">
+      <!-- JS will inject up to 3 glass boxes here -->
+    </div>
+
+    <!-- UNIFIED VIEW BOX -->
+    <div id="unifiedBox" class="unified-box hidden glass">
+      <h2>Unified View</h2>
+      <div id="unifiedContent"></div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER NAV -->
+  <footer class="glass footer">
+    <button id="navBrowse" class="nav-btn active">Browse</button>
+    <button id="navFavorites" class="nav-btn">Favorites</button>
+    <button id="navTimeline" class="nav-btn">Timeline</button>
+    <button id="navAnalyzer" class="nav-btn">Analyzer</button>
+    <button id="navVault" class="nav-btn">Vault</button>
+  </footer>
+
+  <!-- JAVASCRIPT MODULES -->
+  <script type="module" src="app.js"></script>
+  <script type="module" src="accounts.js"></script>
+  <script type="module" src="ui.js"></script>
+  <script type="module" src="unified.js"></script>
+  <script type="module" src="viewer.js"></script>
+  <script type="module" src="storage.js"></script>
+  <script type="module" src="timeline.js"></script>
+  <script type="module" src="themes.js"></script>
+  <script type="module" src="terms.js"></script>
+
+</body>
+</html>
