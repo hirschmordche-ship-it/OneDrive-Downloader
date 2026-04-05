@@ -1,4 +1,3 @@
-/* GLOBAL RESET */
 * {
   margin: 0;
   padding: 0;
@@ -6,118 +5,292 @@
   -webkit-tap-highlight-color: transparent;
 }
 
+:root {
+  --bg: radial-gradient(circle at top, #1f2933, #020617);
+  --text: #f9fafb;
+}
+
 body {
-  font-family: system-ui, sans-serif;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
-  color: white;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
   min-height: 100vh;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
+  align-items: stretch;
 }
 
-/* GLASS EFFECT */
+/* THEMES */
+body.blue { --bg: radial-gradient(circle at top, #1d4ed8, #020617); }
+body.purple { --bg: radial-gradient(circle at top, #6d28d9, #020617); }
+body.green { --bg: radial-gradient(circle at top, #059669, #020617); }
+body.sunset { --bg: radial-gradient(circle at top, #f97316, #020617); }
+
+/* GLASS */
 .glass {
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 4px 20px rgba(0,0,0,0.25);
+  background: rgba(15, 23, 42, 0.78);
+  backdrop-filter: blur(18px);
+  border-radius: 20px;
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.6);
 }
 
-/* HEADER */
-.header {
-  padding: 16px;
+/* APP SHELL */
+.app-shell {
+  width: 100%;
+  max-width: 480px;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+}
+
+/* TOP BAR */
+.topbar {
+  height: 52px;
+  display: flex;
+  align-items: center;
+  padding: 0 14px;
+  margin-bottom: 10px;
+}
+
+.icon-btn {
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 22px;
+}
+
+.topbar-title {
+  flex: 1;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.avatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #38bdf8, #6366f1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+}
+
+/* MAIN */
+.main {
+  flex: 1;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.header-actions {
-  display: flex;
-  gap: 8px;
+.section-header h2 {
+  font-size: 20px;
+}
+
+.chip {
+  border-radius: 999px;
+  border: none;
+  padding: 6px 12px;
+  font-size: 13px;
+  background: rgba(148, 163, 184, 0.2);
+  color: var(--text);
+}
+
+.section-content {
+  margin-top: 8px;
+  flex: 1;
+  overflow-y: auto;
 }
 
 /* BUTTONS */
-.btn {
-  padding: 8px 14px;
-  border-radius: 12px;
+.primary-btn {
+  width: 100%;
+  padding: 14px;
+  border-radius: 14px;
   border: none;
-  background: rgba(255,255,255,0.15);
+  background: linear-gradient(135deg, #22c55e, #16a34a);
   color: white;
-  font-size: 14px;
+  font-size: 16px;
+  margin-bottom: 14px;
 }
 
-.btn.primary {
-  background: #3b82f6;
-}
-
-.btn.small {
-  padding: 6px 10px;
-  font-size: 12px;
-}
-
-/* ACCOUNT BOXES */
-.account-boxes {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-  padding: 16px;
-}
-
-.account-box {
-  padding: 16px;
-}
-
-.unified-box {
-  margin: 16px;
-  padding: 16px;
-}
-
-/* FOOTER NAV */
-.footer {
-  display: flex;
-  justify-content: space-around;
+/* ACCOUNT CARDS */
+.account-card {
   padding: 12px;
-  margin-top: auto;
+  border-radius: 16px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid rgba(148, 163, 184, 0.4);
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.account-icon {
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #3b82f6, #22c55e);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+}
+
+.account-info {
+  flex: 1;
+}
+
+.account-name {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.account-sub {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+/* BOTTOM BAR */
+.bottombar {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 10px;
 }
 
 .nav-btn {
   background: none;
   border: none;
-  color: white;
-  font-size: 14px;
+  color: var(--text);
   opacity: 0.6;
+  font-size: 13px;
 }
 
 .nav-btn.active {
   opacity: 1;
-  font-weight: bold;
+  font-weight: 600;
 }
 
-/* MODAL */
-.modal {
+/* DRAWER */
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 260px;
+  height: 100vh;
+  padding: 16px;
+  transform: translateX(-280px);
+  transition: transform 0.25s ease-out;
+  z-index: 20;
+}
+
+.drawer.open {
+  transform: translateX(0);
+}
+
+.drawer-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 18px;
+}
+
+.avatar-large {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #6366f1, #ec4899);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drawer-name {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.drawer-sub {
+  font-size: 11px;
+  opacity: 0.7;
+}
+
+.drawer-section {
+  margin-bottom: 14px;
+}
+
+.drawer-item {
+  padding: 10px 8px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+.drawer-item:active {
+  background: rgba(148, 163, 184, 0.25);
+}
+
+.drawer-item.danger {
+  color: #f97373;
+}
+
+/* OVERLAY */
+.overlay {
   position: fixed;
   inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background: rgba(15, 23, 42, 0.6);
+  z-index: 10;
 }
 
-.modal.hidden {
-  display: none;
+/* THEME SHEET */
+.theme-sheet {
+  position: fixed;
+  left: 50%;
+  bottom: 0;
+  transform: translate(-50%, 260px);
+  width: 100%;
+  max-width: 480px;
+  padding: 14px;
+  border-radius: 20px 20px 0 0;
+  transition: transform 0.25s ease-out;
+  z-index: 30;
 }
 
-.modal-content {
-  width: 90%;
-  max-width: 400px;
+.theme-sheet.open {
+  transform: translate(-50%, 0);
 }
 
-.terms-text {
-  max-height: 300px;
-  overflow-y: auto;
-  margin: 12px 0;
+.sheet-handle {
+  width: 40px;
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.7);
+  margin: 0 auto 10px;
+}
+
+.theme-row {
+  padding: 10px;
+  border-radius: 12px;
+  margin-bottom: 6px;
+  background: rgba(15, 23, 42, 0.9);
   font-size: 14px;
-  line-height: 1.4;
 }
+
+.theme-row:active {
+  background: rgba(148, 163, 184, 0.25);
+}
+
+/* UTIL */
+.hidden { display: none; }
