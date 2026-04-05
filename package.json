@@ -1,0 +1,14 @@
+{
+  "name": "onedrive-multi-account-mobile",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vercel dev",
+    "build": "echo \"Vercel builds functions automatically\"",
+    "start": "vercel dev"
+  },
+  "dependencies": {
+    "node-fetch": "^3.3.2"
+  },
+  "type": "module"
+}
